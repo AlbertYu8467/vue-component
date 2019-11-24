@@ -57,7 +57,7 @@ export default {
       this.warpList.map( value => {
         regex.test(value[keyName]) && list.push(value)
       })
-      return list;
+      return list;//每次返回一个新数组,引用地址改变，每次都会触发watch
     },
   },
   watch:{
@@ -103,7 +103,6 @@ export default {
   .t-no-data {
     height: 200px;
     line-height: 200px;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
   }
   ul {
     height: 200px;

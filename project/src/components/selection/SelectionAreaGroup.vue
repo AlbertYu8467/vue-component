@@ -1,6 +1,6 @@
 <template>
   <div>
-      <div class="t-select-group" ref="group">
+    <div class="t-select-group" ref="group">
       <div class="t-select-item" v-for="(v,k) in group" :key="k">
         <selection-area :list="v.list" :multiple="v.multiple" :keyName="k"
           :isSearch="v.isSearch" :textAlign="v.textAlign" :width="width" 
@@ -45,14 +45,12 @@ export default {
       
     }
   },
-  beforeMount(){
+  mounted(){    
     this.resetSelectGroup();
-  },
-  mounted(){
-    this.setItemWidth()
+    this.setPanelWidth()
   },
   methods: {
-    setItemWidth(){
+    setPanelWidth(){
       let offsetWidth = this.$refs.group.offsetWidth;
       this.width = Math.floor( ( 1 / this.keyList.length - 0.01 ) * offsetWidth );
     },
@@ -69,7 +67,7 @@ export default {
           }
         })
       })
-      this.$emit('all-select',{list:hasSelectList})
+      this.$emit('all-select',hasSelectList)
     },
     handleGroup(){
       this.keyList.map( v => {
@@ -79,11 +77,13 @@ export default {
           textAlign:v.textAlign,
           isSearch:v.isSearch,
           title:v.title,
+
           list:list.map( value => {
             return { [v.name]:value }
           })
         }
         this.$set(this.group, v.name, obj);
+        this.$children.map( value => value.searchText = "");
       })
     },
     clearGroup(){
@@ -116,7 +116,7 @@ export default {
     clearNextAllList(index){
       for(let i=index+1; i<this.keyList.length; i++){
         let key = this.keyList[i].name;
-        this.group[key].list = []
+        this.group[key].list = []//触发子组件的watch事件
       }
     },
   },

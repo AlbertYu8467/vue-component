@@ -11,8 +11,8 @@ export default {
   data() {
     return {
       keyList:[
-        {name:'country',multiple:false,textAlign:'center',"isSearch":true,"title":'国家'},
-        {name:'province',multiple:false,textAlign:'center',"isSearch":true,"title":'省份'},
+        {name:'country',multiple:true,textAlign:'center',"isSearch":true,"title":'国家'},
+        {name:'province',multiple:true,textAlign:'center',"isSearch":true,"title":'省份'},
         {name:'city',multiple:true,textAlign:'center',"isSearch":true, "title":'城市'},
       ],
       groupList:[
